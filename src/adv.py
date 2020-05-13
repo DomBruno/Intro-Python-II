@@ -1,5 +1,6 @@
 from room import Room
-
+from player import Player
+import sys
 # Declare all the rooms
 
 room = {
@@ -38,6 +39,8 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
+player = Player('Raistlin', room['outside'], [None])
+game_start = True
 
 # Write a loop that:
 #
@@ -49,3 +52,26 @@ room['treasure'].s_to = room['narrow']
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+def get_travel_dir():
+    global game_start
+    if game_start:
+        game_start = False
+        input('Welcome to Miniscule Cave Adventure!\n\nHit enter to continue\n\n\n')
+    else:
+        direction = input('[n] North [s] South [e] East [w] West [q] Quit \n\n')
+        return direction
+
+player_move = get_travel_dir()
+
+
+# Displays current room name and desc, appends user directional input to '_to' 
+while player_move != "q":
+    print(player.current_room)
+    print(player.current_room.desc)
+    print('\n')
+    player_move = get_travel_dir()
+    if player_move != 'q':
+        player.move(f'{direction}_to')
+    else:
+        sys.exit('Thank you for playing Miniscule Cave!')
