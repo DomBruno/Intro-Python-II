@@ -72,6 +72,6 @@ while player_move != "q":
     print('\n')
     player_move = get_travel_dir()
     if player_move != 'q':
-        player.move(f'{direction}_to')
+        player.move(f'{player_move}_to')
     else:
         sys.exit('Thank you for playing Miniscule Cave!')
